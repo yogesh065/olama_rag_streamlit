@@ -20,7 +20,6 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 api_key = os.getenv("GROQ_API_KEY")
 api_key = st.secrets["k"]["api_key"]
 
-client = Groq(api_key=api_key)
 
 llm = ChatGroq(model="llama3-8b-8192", groq_api_key=api_key)
 
