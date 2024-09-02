@@ -6,3 +6,4 @@ ollama
 pypdf
 fastembed
 chromadb
+protobuf==3.20.*
