@@ -9,9 +9,9 @@ from langchain.prompts import PromptTemplate
 from langchain.vectorstores.utils import filter_complex_metadata
 import os
 
-import ollama
 
-ollama.pull('mistral')
+
+
 
 
 
