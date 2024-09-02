@@ -9,7 +9,7 @@ from langchain.prompts import PromptTemplate
 from langchain.vectorstores.utils import filter_complex_metadata
 import os
 
-
+import streamlit as st 
 
 
 
@@ -36,6 +36,7 @@ class ChatPDF:
         docs = PyPDFLoader(file_path=pdf_file_path).load()
         chunks = self.text_splitter.split_documents(docs)
         chunks = filter_complex_metadata(chunks)
+        st.write("this is the chunk of data"+str(chunks))
 
         vector_store = Chroma.from_documents(documents=chunks, embedding=FastEmbedEmbeddings())
         self.retriever = vector_store.as_retriever(
@@ -45,7 +46,7 @@ class ChatPDF:
                 "score_threshold": 0.5,
             },
         )
-
+        st.write("embedding done")
         self.chain = ({"context": self.retriever, "question": RunnablePassthrough()}
                       | self.prompt
                       | self.model
