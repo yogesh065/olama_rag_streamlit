@@ -10,12 +10,19 @@ from langchain.vectorstores.utils import filter_complex_metadata
 import os
 
 import streamlit as st 
+from langchain_groq import ChatGroq
+
 
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
+api_key = os.getenv("GROQ_API_KEY")
+api_key = st.secrets["k"]["api_key"]
 
+client = Groq(api_key=api_key)
+
+llm = ChatGroq(model="llama3-8b-8192", groq_api_key=api_key)
 
 class ChatPDF:
     vector_store = None
@@ -23,7 +30,7 @@ class ChatPDF:
     chain = None
 
     def __init__(self):
-        self.model = ChatOllama(model="phi")
+        self.model = llm
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=100)
         self.prompt = PromptTemplate.from_template(
             """

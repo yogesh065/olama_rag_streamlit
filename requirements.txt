@@ -8,3 +8,4 @@ fastembed
 chromadb
 protobuf==3.20.*
 pysqlite3-binary
+langchain_groq 
